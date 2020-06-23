@@ -1,0 +1,525 @@
+<!doctype html>
+
+<html lang="en-us">
+
+<head>
+  <title>Aditya Saini&#39;s blog</title>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="The HTML5 Herald" />
+<meta name="author" content="Aditya Saini" /><link rel="alternate" type="application/rss+xml+xml" href="https://adityasaini.in/blog/index.xml" title="Aditya Saini's blog" /><meta property="og:title" content="Aditya Saini&#39;s blog" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://adityasaini.in/blog/" />
+<meta property="og:updated_time" content="2020-04-25T00:00:00+05:30" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Aditya Saini&#39;s blog"/>
+<meta name="twitter:description" content=""/>
+
+<meta name="generator" content="Hugo 0.72.0" />
+    
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://adityasaini.in/blog/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/blog/css/styles.css" /></head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/blog/">Aditya Saini&rsquo;s blog</a>
+            </h1>
+
+      <ul id="social-media">
+      </ul>
+      
+      <p><em>Pure Computer Science Knowledge Portal</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+    </ul>
+</nav>
+
+
+    <main>
+
+
+
+
+<section id="home">
+  <ul>
+    
+    
+    
+
+    <li class="first" >
+      <h1><a href="https://adityasaini.in/blog/posts/79-word-search-leetcode-problem-solution/" title="✱✱✱ 79. Word Search Leetcode Problem Solution">✱✱✱ 79. Word Search Leetcode Problem Solution</a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-04-25T00:00:00&#43;05:30">Apr 25, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+      
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/79-word-search-leetcode-problem-solution/" title="✱✱✱ 79. Word Search Leetcode Problem Solution">
+        <img src="">
+    </a>
+</div>
+
+
+      <p>In this problem we use the concept of backtracking, whenver we find a character matching the first character of our word we check the solution there if it is possible, for that we make four choices as we can move in four diretions left, right , upside and down and backtrack if we don&rsquo;t find the solution while traversing one of our possible paths.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39  class Solution: def check_word(self,board,word,r,c): if word[0] == board[r][c] and board[r][c] is not None: char_is = board[r][c] board[r][c] = None word = word[1:] if len(word) == 0: return True if (r+1 &lt; len(board) and self.</p>
+      
+      <a href="/blog/posts/79-word-search-leetcode-problem-solution/">Read more…</a>
+      
+    </li>
+    
+
+    <li >
+      <h1><a href="https://adityasaini.in/blog/posts/leetcode-150-evaluate-reverse-polish-notation/" title="{ Leetcode } 150. Evaluate Reverse Polish Notation">{ Leetcode } 150. Evaluate Reverse Polish Notation</a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-04-18T00:00:00&#43;05:30">Apr 18, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+      
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/leetcode-150-evaluate-reverse-polish-notation/" title="{ Leetcode } 150. Evaluate Reverse Polish Notation">
+        <img src="">
+    </a>
+</div>
+
+
+      <p>We are maintaining a stack to evaluate this reverse polish expression, as soon as we find an operator we replace the top two most elements of the stack with the result and in the end, we get the answer at the top of our stack.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37  class Solution: def evalRPN(self, tokens: List[str]) -&gt; int: #expression stack expr = [] ans = 0 operators = {&#39;+&#39;,&#39;-&#39;,&#39;/&#39;,&#39;*&#39;} for t in tokens: if t in operators: #evalutate op1 = expr[-2] op2 = expr[-1] if t == &#39;+&#39;: ans = op1 + op2 elif t == &#39;/&#39;: if op2 == 0: ans = 0 elif op1 &lt; 0 and op2 &gt; 0: ans = (-1* op1) // op2 ans = ans * -1 elif op1 &gt;0 and op2 &lt; 0: ans = op1 // (op2 * -1) ans = ans * -1 else: ans = op1 // op2 elif t == &#34;*&#34;: ans = op1 * op2 else: ans = op1 - op2 expr.</p>
+      
+      <a href="/blog/posts/leetcode-150-evaluate-reverse-polish-notation/">Read more…</a>
+      
+    </li>
+    
+
+    <li >
+      <h1><a href="https://adityasaini.in/blog/posts/leetcode-19-remove-nth-node-from-end-of-list/" title="Leetcode 19. Remove Nth Node From End of List">Leetcode 19. Remove Nth Node From End of List</a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-04-14T00:00:00&#43;05:30">Apr 14, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+      
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/leetcode-19-remove-nth-node-from-end-of-list/" title="Leetcode 19. Remove Nth Node From End of List">
+        <img src="">
+    </a>
+</div>
+
+
+      <p>We are using a hashmap or dictionary to maintain indexes of node as we traverse them, as soon as we finish traversing we get the nth node from the back by subtracting it from the last node + 1, +1 as we move ahead of the last node and reach null see code to clarify this little thing, we make the pointer of the n-1&rsquo;th node pointing to n+1&rsquo;th node.</p>
+      
+      <a href="/blog/posts/leetcode-19-remove-nth-node-from-end-of-list/">Read more…</a>
+      
+    </li>
+    
+
+    <li >
+      <h1><a href="https://adityasaini.in/blog/posts/leetcode-34-find-first-and-last-position-of-element-in-sorted-array/" title="Leetcode 34 -&gt; Find First and Last Position of Element in Sorted Array">Leetcode 34 -&gt; Find First and Last Position of Element in Sorted Array</a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-03-28T00:00:00&#43;05:30">Mar 28, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+      
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/leetcode-34-find-first-and-last-position-of-element-in-sorted-array/" title="Leetcode 34 -&gt; Find First and Last Position of Element in Sorted Array">
+        <img src="">
+    </a>
+</div>
+
+
+      <p>We use the modified binary search here, when we find the element we don&rsquo;t break our binary search, instead we keep on moving, One time towards left and another time towards the right to find the left most and right most index of our target. The below code illustrates the approach more clearly.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32  class Solution: def bin_search(self,nums,target,lr): n = len(nums) low = 0 high = n-1 tfound = None while low&lt;=high: mid = (low+high)//2 if nums[mid] == target: tfound = mid if lr == &#34;left&#34;: high = mid-1 else: low = mid + 1 # break elif target &lt; nums[mid]: high = mid - 1 else: low = mid + 1 if tfound == None: tfound = -1 return tfound def searchRange(self, nums: List[int], target: int) -&gt; List[int]: n = len(nums) lb = self.</p>
+      
+      <a href="/blog/posts/leetcode-34-find-first-and-last-position-of-element-in-sorted-array/">Read more…</a>
+      
+    </li>
+    
+
+    <li >
+      <h1><a href="https://adityasaini.in/blog/posts/leetcode-134-gas-station-solution-in-python3-programming-language/" title="Leetcode 134. Gas Station  solution in Python 3 programming language">Leetcode 134. Gas Station  solution in Python 3 programming language</a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-03-14T00:00:00&#43;05:30">Mar 14, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+      
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/leetcode-134-gas-station-solution-in-python3-programming-language/" title="Leetcode 134. Gas Station  solution in Python 3 programming language">
+        <img src="">
+    </a>
+</div>
+
+
+      <p>We start our journey at each gas pump and check whether we reach the starting pump or not, just see the code below to get the grasp of the approach used for this problem.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20  class Solution: def canCompleteCircuit(self, gas: List[int], cost: List[int]) -&gt; int: n = len(gas) for starting_pump in range(n): tank = gas[starting_pump] cost_to_next_pump = cost[starting_pump] next_pump = starting_pump while tank &gt;= cost_to_next_pump: tank -= cost_to_next_pump next_pump = (next_pump + 1)%n if next_pump == starting_pump: return starting_pump tank += gas[next_pump] cost_to_next_pump = cost[next_pump] return -1    </p>
+      
+    </li>
+    
+
+    <li >
+      <h1><a href="https://adityasaini.in/blog/posts/leetcode-56-merge-intervals-python-3/" title="Leetcode 56. Merge Intervals Python 3 Solution">Leetcode 56. Merge Intervals Python 3 Solution</a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-03-02T12:00:00&#43;05:30">Mar 2, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+      
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/leetcode-56-merge-intervals-python-3/" title="Leetcode 56. Merge Intervals Python 3 Solution">
+        <img src="">
+    </a>
+</div>
+
+
+      <p>For this problem first, we sort all the intervals in increasing order of the starting values of intervals which will take O(N log N) time. We maintain a stack where we keep on checking the top most value of stack if the current iterated elenent is overlapping with the top most element of stack then we update our stack, if the interval is non-overlapping we just simply append it in our stack.</p>
+      
+      <a href="/blog/posts/leetcode-56-merge-intervals-python-3/">Read more…</a>
+      
+    </li>
+    
+
+    <li >
+      <h1><a href="https://adityasaini.in/blog/posts/leetcode-210-course-schedule-ii-python-3/" title="Leetcode 210 Course Schedule II Python 3 Solution">Leetcode 210 Course Schedule II Python 3 Solution</a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-02-24T12:00:00&#43;05:30">Feb 24, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+      
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/leetcode-210-course-schedule-ii-python-3/" title="Leetcode 210 Course Schedule II Python 3 Solution">
+        <img src="">
+    </a>
+</div>
+
+
+      <p>Approach - We will first create a graph out of this problem, Every pre-requisite course is connected to the course so the Pre=requisite course will be directing towards the course so we will create a Directed Acyclic Graph. We will find if there is any cycle in the graph and if it is so then taking all the courses will not be possible. To find if there is any cycle in the graph we will use an earlier discussed approach we took in Course Schedule I.</p>
+      
+      <a href="/blog/posts/leetcode-210-course-schedule-ii-python-3/">Read more…</a>
+      
+    </li>
+    
+
+    <li >
+      <h1><a href="https://adityasaini.in/blog/posts/leetcode-139-word-break-python-3/" title="Leetcode 139 Word Break Python 3 ">Leetcode 139 Word Break Python 3 </a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-02-02T12:00:00&#43;05:30">Feb 2, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+      
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/leetcode-139-word-break-python-3/" title="Leetcode 139 Word Break Python 3 ">
+        <img src="">
+    </a>
+</div>
+
+
+      <p>Approach - We use dynamic programming in our solution. we first initialize our DP array with false at each index of character. We make our dp[i] as true when we have a word ending at i&rsquo;th index in our dictionary and for that, the character before starting of this word in our string must also mark the end of the word. so in this way, our answer is at the last index of our DP array.</p>
+      
+      <a href="/blog/posts/leetcode-139-word-break-python-3/">Read more…</a>
+      
+    </li>
+    
+
+    <li >
+      <h1><a href="https://adityasaini.in/blog/posts/leetcode-148-sort-list-python-3-solution/" title="Letcode 148 Sort List Python 3 Solution">Letcode 148 Sort List Python 3 Solution</a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-02-02T10:00:00&#43;05:30">Feb 2, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+      
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/leetcode-148-sort-list-python-3-solution/" title="Letcode 148 Sort List Python 3 Solution">
+        <img src="">
+    </a>
+</div>
+
+
+      <p>Approach - We use a merge sort for solving this problem it has to be done in O(N log N) and constant space O(1). We use the idea of merge sort where we first divide the list into two halves, doing so in an Array is easy but in a linked list, you have to do something different. We use the concept of fast and slow pointers where fast pointer traverses directly at a gap of two nodes whereas slow pointer traverses one at a time.</p>
+      
+      <a href="/blog/posts/leetcode-148-sort-list-python-3-solution/">Read more…</a>
+      
+    </li>
+    
+
+    <li >
+      <h1><a href="https://adityasaini.in/blog/posts/leetcode-334-increasing-triplet-subsequence/" title="Leetcode 334 Increasing Triplet Subsequence - Python Solution">Leetcode 334 Increasing Triplet Subsequence - Python Solution</a></h1>
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-01-16T10:00:00&#43;05:30">Jan 16, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+      
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/leetcode-334-increasing-triplet-subsequence/" title="Leetcode 334 Increasing Triplet Subsequence - Python Solution">
+        <img src="">
+    </a>
+</div>
+
+
+      <p>Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array. Approach - We take two variables a and b . We initialize them to the biggest number in the array and then we iterate over the list and if a value is found less than the current value of a and b we change them. If a value greater than both of them is found then we return True which means we have found increasing subsequence.</p>
+      
+      <a href="/blog/posts/leetcode-334-increasing-triplet-subsequence/">Read more…</a>
+      
+    </li>
+    
+  </ul>
+</section>
+
+
+
+<ul class="pagination">
+    
+    <li class="page-item">
+        <a href="/blog/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li class="page-item disabled">
+    <a  class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item active"><a class="page-link" href="/blog/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/blog/page/2/">2</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/blog/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+        <a href="/blog/page/2/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+
+
+
+
+</main>
+    <footer>
+        <h6> <a href="https://adityasaini.in" title="Aditya">Aditya Saini</a> </h6>
+    </footer>
+</div>
+<script src="/blog/js/scripts.js"></script>
+
+</body>
+
+</html>
+

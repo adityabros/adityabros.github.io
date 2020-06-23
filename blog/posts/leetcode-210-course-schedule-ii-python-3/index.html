@@ -1,0 +1,228 @@
+<!doctype html>
+
+<html lang="en-us">
+
+<head>
+  <title>Aditya Saini&#39;s blog</title>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="The HTML5 Herald" />
+<meta name="author" content="Aditya Saini" /><meta property="og:title" content="Leetcode 210 Course Schedule II Python 3 Solution" />
+<meta property="og:description" content="Approach - We will first create a graph out of this problem, Every pre-requisite course is connected to the course so the Pre=requisite course will be directing towards the course so we will create a Directed Acyclic Graph. We will find if there is any cycle in the graph and if it is so then taking all the courses will not be possible. To find if there is any cycle in the graph we will use an earlier discussed approach we took in Course Schedule I." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://adityasaini.in/blog/posts/leetcode-210-course-schedule-ii-python-3/" />
+<meta property="article:published_time" content="2020-02-24T12:00:00+05:30" />
+<meta property="article:modified_time" content="2020-02-24T12:00:00+05:30" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Leetcode 210 Course Schedule II Python 3 Solution"/>
+<meta name="twitter:description" content="Approach - We will first create a graph out of this problem, Every pre-requisite course is connected to the course so the Pre=requisite course will be directing towards the course so we will create a Directed Acyclic Graph. We will find if there is any cycle in the graph and if it is so then taking all the courses will not be possible. To find if there is any cycle in the graph we will use an earlier discussed approach we took in Course Schedule I."/>
+
+<meta name="generator" content="Hugo 0.72.0" />
+    
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://adityasaini.in/blog/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/blog/css/styles.css" /></head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/blog/">Aditya Saini&rsquo;s blog</a>
+            </h1>
+
+      <ul id="social-media">
+      </ul>
+      
+      <p><em>Pure Computer Science Knowledge Portal</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+    </ul>
+</nav>
+
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Leetcode 210 Course Schedule II Python 3 Solution</h1>
+
+    
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-02-24T12:00:00&#43;05:30">Feb 24, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+    
+
+    
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/leetcode-210-course-schedule-ii-python-3/" title="Leetcode 210 Course Schedule II Python 3 Solution">
+        <img src="">
+    </a>
+</div>
+
+
+
+    <p>Approach - We will first create a graph out of this problem, Every pre-requisite course is connected to the course so the Pre=requisite course will be directing towards the course so we will create a Directed Acyclic Graph. We will find if there is any cycle in the graph and if it is so then taking all the courses will not be possible. To find if there is any cycle in the graph we will use an earlier discussed approach we took in Course Schedule I. We will use Topological Sort to get the order in which we need to take the course so that we take all the pre-requisites before the courses. If you have any doubt just let me know in the comments.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">findOrder</span>(self, numCourses: int, prerequisites: List[List[int]]) <span style="color:#f92672">-&gt;</span> List[int]:
+        
+        white <span style="color:#f92672">=</span> set()
+        black <span style="color:#f92672">=</span> set()
+        grey  <span style="color:#f92672">=</span> set()
+        top_sort <span style="color:#f92672">=</span> []
+        <span style="color:#75715e"># visited = set()</span>
+        connections <span style="color:#f92672">=</span> dict()
+        <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> prerequisites:
+            <span style="color:#66d9ef">if</span> p[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> connections:
+                connections[p[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> set()
+            connections[p[<span style="color:#ae81ff">1</span>]]<span style="color:#f92672">.</span>add(p[<span style="color:#ae81ff">0</span>])
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(numCourses):
+            white<span style="color:#f92672">.</span>add(i)
+            <span style="color:#75715e"># white.add(p[0])</span>
+            
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">traverse</span>(root):
+            <span style="color:#66d9ef">if</span> root <span style="color:#f92672">in</span> grey:
+                <span style="color:#75715e">#we have found cycle in our graph</span>
+                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+            grey<span style="color:#f92672">.</span>add(root)
+            
+            <span style="color:#66d9ef">if</span> root <span style="color:#f92672">in</span> connections:
+                <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> connections[root]:
+                    <span style="color:#66d9ef">if</span> node <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> black:
+                        ans <span style="color:#f92672">=</span> traverse(node)
+                        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> ans:
+                            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+            
+            grey<span style="color:#f92672">.</span>remove(root)
+            <span style="color:#66d9ef">if</span> root <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> black:
+                top_sort<span style="color:#f92672">.</span>append(root)
+            black<span style="color:#f92672">.</span>add(root)
+            
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+        
+        <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> white:
+            ans <span style="color:#f92672">=</span> traverse(w)
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> ans:
+                top_sort <span style="color:#f92672">=</span> []
+                <span style="color:#66d9ef">break</span>
+        <span style="color:#66d9ef">return</span> top_sort[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+        </code></pre></td></tr></table>
+</div>
+</div>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://adityasaini.in/blog/posts/leetcode-139-word-break-python-3/"><i class="fa fa-chevron-circle-left"></i> Leetcode 139 Word Break Python 3 </a>
+        </li>
+        
+        
+        <li>
+            <a href="https://adityasaini.in/blog/posts/leetcode-56-merge-intervals-python-3/">Leetcode 56. Merge Intervals Python 3 Solution <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+  
+    
+    
+  
+
+
+
+
+
+</main>
+    <footer>
+        <h6> <a href="https://adityasaini.in" title="Aditya">Aditya Saini</a> </h6>
+    </footer>
+</div>
+<script src="/blog/js/scripts.js"></script>
+
+</body>
+
+</html>
+

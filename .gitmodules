@@ -1,0 +1,3 @@
+[submodule "code/themes/kiera"]
+	path = code/themes/kiera
+	url = https://github.com/funkydan2/hugo-kiera.git

@@ -1,0 +1,194 @@
+<!doctype html>
+
+<html lang="en-us">
+
+<head>
+  <title>Aditya Saini&#39;s blog</title>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="The HTML5 Herald" />
+<meta name="author" content="Aditya Saini" /><meta property="og:title" content="Set Matrix Zero, LeetCode 73 Solution in Python 3" />
+<meta property="og:description" content="Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in-place. Example 1: Input: [ [1,1,0], [1,0,1], [1,1,1] ] Output: [ [0,0,0], [0,0,0], [1,0,0] ] Here the approach is very simple. We just have to traverse the matrix and note down the rows and columns indexes which are required to be zero, for that we will use set data structure as it has a constant O(1) search complexity." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://adityasaini.in/blog/posts/set-matrix-zero-leetcode-73-solution-in-python/" />
+<meta property="article:published_time" content="2020-01-02T22:39:13+05:30" />
+<meta property="article:modified_time" content="2020-01-02T22:39:13+05:30" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Set Matrix Zero, LeetCode 73 Solution in Python 3"/>
+<meta name="twitter:description" content="Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in-place. Example 1: Input: [ [1,1,0], [1,0,1], [1,1,1] ] Output: [ [0,0,0], [0,0,0], [1,0,0] ] Here the approach is very simple. We just have to traverse the matrix and note down the rows and columns indexes which are required to be zero, for that we will use set data structure as it has a constant O(1) search complexity."/>
+
+<meta name="generator" content="Hugo 0.72.0" />
+    
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://adityasaini.in/blog/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/blog/css/styles.css" /></head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/blog/">Aditya Saini&rsquo;s blog</a>
+            </h1>
+
+      <ul id="social-media">
+      </ul>
+      
+      <p><em>Pure Computer Science Knowledge Portal</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+    </ul>
+</nav>
+
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Set Matrix Zero, LeetCode 73 Solution in Python 3</h1>
+
+    
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-01-02T22:39:13&#43;05:30">Jan 2, 2020</time>
+        </li>
+        
+        <li>
+            Categories:
+            <em>
+                
+                    
+                    <a href="/blog/categories/leetcode">leetcode</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li></li>
+    </ul>
+</aside>
+
+    
+
+    
+<div class="featured_image">
+    <a href="https://adityasaini.in/blog/posts/set-matrix-zero-leetcode-73-solution-in-python/" title="Set Matrix Zero, LeetCode 73 Solution in Python 3">
+        <img src="">
+    </a>
+</div>
+
+
+
+    <p>Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in-place.
+Example 1:
+Input: 
+[
+[1,1,0],
+[1,0,1],
+[1,1,1]
+]
+Output: 
+[
+[0,0,0],
+[0,0,0],
+[1,0,0]
+]
+Here the approach is very simple. We just have to traverse the matrix and note down the rows and columns indexes which are required to be zero, for that we will use set data structure as it has a constant O(1) search complexity. Then we will again traverse the matrix and will make the element zero if its row or its column is in our set.Below is code of this approach in Python. Just try to do it yourself and then only look into the code otherwise it will hinder your growth.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setZeroes</span>(self, matrix: List[List[int]]) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Do not return anything, modify matrix in-place instead.
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        rows <span style="color:#f92672">=</span> len(matrix)
+        <span style="color:#66d9ef">if</span>  rows <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+            cols <span style="color:#f92672">=</span> len(matrix[<span style="color:#ae81ff">0</span>])
+        zero_rows <span style="color:#f92672">=</span> set()
+        zero_cols <span style="color:#f92672">=</span> set()
+        
+        <span style="color:#66d9ef">for</span> r <span style="color:#f92672">in</span> range(rows):
+            <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> range(cols):
+                <span style="color:#66d9ef">if</span> matrix[r][c] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+                    zero_rows<span style="color:#f92672">.</span>add(r)
+                    zero_cols<span style="color:#f92672">.</span>add(c)
+        <span style="color:#66d9ef">for</span> r <span style="color:#f92672">in</span> range(rows):
+            <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> range(cols):
+                <span style="color:#66d9ef">if</span> r <span style="color:#f92672">in</span> zero_rows <span style="color:#f92672">or</span> c <span style="color:#f92672">in</span> zero_cols:
+                    matrix[r][c] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span></code></pre></td></tr></table>
+</div>
+</div>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://adityasaini.in/blog/posts/hello-world/"><i class="fa fa-chevron-circle-left"></i> Hello World</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://adityasaini.in/blog/posts/lowest-common-ancestor-of-binary-tree-leetcode-236-solution-python-3/">Lowest Common Ancestor of a Binary Tree Leetcode 236 in Python 3 <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+  
+    
+    
+  
+
+
+
+
+
+</main>
+    <footer>
+        <h6> <a href="https://adityasaini.in" title="Aditya">Aditya Saini</a> </h6>
+    </footer>
+</div>
+<script src="/blog/js/scripts.js"></script>
+
+</body>
+
+</html>
+
