@@ -69,15 +69,24 @@
 
 		  		  recognition.onresult = function(event) {
 		  		    var interim_transcript = '';
-		  		    console.log(event.results);
+		  		    // console.log(event.results);
 		  		    for (var i = event.resultIndex; i < event.results.length; ++i) {
 		  		      if (event.results[i].isFinal) {
 		  		        final_transcript += event.results[i][0].transcript;
-			  		    if(final_transcript.indexOf("hare krishna hare krishna krishna krishna hare hare hare rama hare rama rama rama hare hare") != -1){
-			  		    	console.log(interim_transcript,ct)
+		  		        
+		  		        var hare_count = (final_transcript.match(/hare/g) || []).length;
+		  		        var krishna_count = (final_transcript.match(/krishna/g) || []).length;
+		  		        var rama_count = (final_transcript.match(/rama/g) || []).length;
+
+			  		    if(hare_count >= 8 && krishna_count >= 4 && rama_count >= 4){
+
+			  		    	// console.log(interim_transcript,ct)
 			  		    	document.getElementById("counts").innerHTML ="Counts : " +String((++ct));
 			  		    	document.getElementById("rounds").innerHTML = "Rounds : "+String(parseInt(ct/108));
 			  		    	final_transcript = "";
+			  		    	hare_count = 0;
+			  		    	krishna_count = 0;
+			  		    	rama_count = 0;
 			  		    }
 		  		      } else {
 		  		        interim_transcript += event.results[i][0].transcript;
