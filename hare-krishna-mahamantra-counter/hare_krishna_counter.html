@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hare Krishna Counter</title>
+	<style type="text/css">
+		#mic_image{
+			cursor: pointer;
+		}
+		body{
+			font-family: cursive;
+		}
+		#counts,#rounds{
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h2 style="text-align: center;">Hare Krishna Maha-Mantra Counter</h2>
+	<h3 style="text-align: center;">Chant : Hare Krishna Hare Krishna Krishna Krishna Hare Hare | Hare Rama Hare Rama Rama Rama Hare Hare</h3>
+	<h4 style="text-align: center;">Tap Mic to Start/Stop Chanting</h4>
+	<div style="text-align: center;">
+		<img src="static_mic.gif" id="mic_image">
+		<p id="counts">Counts : 0</p>
+		<p id="rounds">Rounds : 0</p>
+	</div>
+	<div style="text-align: center;">
+		<img src="iti_shodshakam.png" id="iti_shodshakam" style="width: 320px;">
+	</div>
+	<div>
+		<p>This application was designed so that people can count their Hare Krishna Maha Mantra chants. Sometimes people may not have their beads or some other issue so in that case they can use this Hare Krishna maha mantra counter to fill the gap and chant and be blissful.</p>
+	</div>
+
+	<script type="text/javascript">
+		document.getElementById("mic_image").addEventListener("click", function() {
+
+
+			curr_src = document.getElementById("mic_image").src;
+		  	
+		  	if (curr_src.indexOf("static_mic.gif") != -1){
+		  		//Haribol started
+
+		  		if (!('webkitSpeechRecognition' in window ) ) {
+		  		  upgrade();
+		  		  return;
+		  		} else {
+		  		  
+		  		  document.getElementById("mic_image").src = "mic.gif";
+		  		  var recognition = new webkitSpeechRecognition();
+		  		  recognition.continuous = true;
+		  		  recognition.interimResults = true;
+		  		  var grammar = '#JSGF V1.0; grammar colors; public <color> = hare | krishna | rama ;'
+		  		  
+		  		  var speechRecognitionList = new webkitSpeechGrammarList();
+		  		  speechRecognitionList.addFromString(grammar, 1);
+		  		  recognition.grammars = speechRecognitionList;
+
+		  		  recognition.start();
+		  		  recognition.onstart = function() {
+		  		   console.log("I started");
+		  		  };
+
+		  		  recognition.onerror = function(event) {
+		  		    		  };
+
+		  		  recognition.onend = function() {
+		  		    
+		  		   
+		  		  };
+
+		  		  recognition.onresult = function(event) {
+		  		    var interim_transcript = '';
+		  		    console.log(event.results);
+		  		    for (var i = event.resultIndex; i < event.results.length; ++i) {
+		  		      if (event.results[i].isFinal) {
+		  		        final_transcript += event.results[i][0].transcript;
+			  		    if(final_transcript.indexOf("hare krishna hare krishna krishna krishna hare hare hare rama hare rama rama rama hare hare") != -1){
+			  		    	console.log(interim_transcript,ct)
+			  		    	document.getElementById("counts").innerHTML ="Counts : " +String((++ct));
+			  		    	document.getElementById("rounds").innerHTML = "Rounds : "+String(parseInt(ct/108));
+			  		    	final_transcript = "";
+			  		    }
+		  		      } else {
+		  		        interim_transcript += event.results[i][0].transcript;
+		  		      }
+		  		    }
+
+		  		    
+		  		    
+		  		    
+		  		  };
+		  		}
+
+		  	}
+		  	else{
+		  		document.getElementById("mic_image").src = "static_mic.gif";	
+		  	}
+
+		});
+
+		var create_email = false;
+		var final_transcript = '';
+		var recognizing = false;
+		var ignore_onend;
+		var start_timestamp;
+		var ct = 0;
+		
+
+		function upgrade() {
+		  alert("You need to update your browser ! . Sorry :(");
+		}
+
+		
+
+	</script>
+</body>
+</html>
