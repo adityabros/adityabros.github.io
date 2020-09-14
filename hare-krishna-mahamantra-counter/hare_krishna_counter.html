@@ -70,14 +70,36 @@
 		  		  recognition.onresult = function(event) {
 		  		    var interim_transcript = '';
 		  		    // console.log(event.results);
+
 		  		    for (var i = event.resultIndex; i < event.results.length; ++i) {
 		  		      if (event.results[i].isFinal) {
 		  		        final_transcript += event.results[i][0].transcript;
 		  		        
-		  		        var hare_count = (final_transcript.match(/hare/g) || []).length;
-		  		        var krishna_count = (final_transcript.match(/krishna/g) || []).length;
-		  		        var rama_count = (final_transcript.match(/rama/g) || []).length;
+		  		        var hare_count = 0;
+		  		        var krishna_count = 0;
+		  		        var rama_count = 0;
+		  		        var hare_synonyms = ["hare","hurray","haray","hray","hrray","hara","har"];
+		  		        var krishna_synonyms = ["krishna","krishn","krsna","klisna","krishnaa"];
+		  		        var rama_synonyms = ["rama","raam","ram","ramaa","raamaa","rom","rome","lama","laam","lam","lamaa","laamaa"];
 
+		  		        for(var h=0;h<hare_synonyms.length;h++){
+		  		        	var hare_regex = new RegExp(hare_synonyms[h],"g");
+		  		        	hare_count += (final_transcript.toLowerCase().match(hare_regex) || []).length;
+		  		        }
+		  		        for(var k=0;k<krishna_synonyms.length;k++){
+		  		        	var krishna_regex = new RegExp(krishna_synonyms[k],"g");
+		  		        	krishna_count += (final_transcript.toLowerCase().match(krishna_regex) || []).length;
+		  		        }
+		  		        for(var r=0;r<rama_synonyms.length;r++){
+		  		        	var rama_regex = new RegExp(rama_synonyms[r],"g");
+		  		        	rama_count += (final_transcript.toLowerCase().match(rama_regex) || []).length;
+		  		        }
+		  		        // krishna_count = (final_transcript.toLowerCase().match(/krishna/g) || []).length;
+		  		        	
+		  		        // rama_count = (final_transcript.toLowerCase().match(/rama/g) || []).length;
+		  		        	
+		  		        // console.log(final_transcript)
+		  		        // console.log(hare_count,krishna_count,rama_count)
 			  		    if(hare_count >= 8 && krishna_count >= 4 && rama_count >= 4){
 
 			  		    	// console.log(interim_transcript,ct)
