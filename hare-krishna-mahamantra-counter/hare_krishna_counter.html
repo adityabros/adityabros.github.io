@@ -22,6 +22,8 @@
 		<img src="static_mic.gif" id="mic_image">
 		<p id="counts">Counts : 0</p>
 		<p id="rounds">Rounds : 0</p>
+		<p id="final_transcript"></p>
+		<p id="counters"></p>
 	</div>
 	<div style="text-align: center;">
 		<img src="iti_shodshakam.png" id="iti_shodshakam" style="width: 320px;">
@@ -91,6 +93,8 @@
 		  		        	
 		  		        // console.log(final_transcript)
 		  		        // console.log(hare_count,krishna_count,rama_count)
+		  		        document.getElementById("final_transcript").innerHTML =final_transcript;
+		  		        document.getElementById("counters").innerHTML =String(hare_count)+","+String(krishna_count)+","+String(rama_count);
 			  		    if(hare_count >= 8 && krishna_count >= 4 && rama_count >= 4){
 
 			  		    	// console.log(interim_transcript,ct)
