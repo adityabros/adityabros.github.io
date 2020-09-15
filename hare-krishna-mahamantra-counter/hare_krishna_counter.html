@@ -45,14 +45,7 @@
 		  		} else {
 		  		  
 		  		  document.getElementById("mic_image").src = "mic.gif";
-		  		  var recognition = new webkitSpeechRecognition();
-		  		  recognition.continuous = true;
-		  		  recognition.interimResults = true;
-		  		  var grammar = '#JSGF V1.0; grammar colors; public <color> = hare | krishna | rama ;'
 		  		  
-		  		  var speechRecognitionList = new webkitSpeechGrammarList();
-		  		  speechRecognitionList.addFromString(grammar, 1);
-		  		  recognition.grammars = speechRecognitionList;
 
 		  		  recognition.start();
 		  		  recognition.onstart = function() {
@@ -63,8 +56,7 @@
 		  		    		  };
 
 		  		  recognition.onend = function() {
-		  		    
-		  		   
+		  		    recognition.start();
 		  		  };
 
 		  		  recognition.onresult = function(event) {
@@ -97,7 +89,8 @@
 			  		    if(hare_count >= 8 && krishna_count >= 4 && rama_count >= 4){
 
 			  		    	// console.log(interim_transcript,ct)
-			  		    	document.getElementById("counts").innerHTML ="Counts : " +String((++ct));
+			  		    	ct += 1;
+			  		    	document.getElementById("counts").innerHTML ="Counts : " +String(ct);
 			  		    	document.getElementById("rounds").innerHTML = "Rounds : "+String(parseInt(ct/108));
 			  		    	final_transcript = "";
 			  		    	hare_count = 0;
@@ -117,7 +110,8 @@
 
 		  	}
 		  	else{
-		  		document.getElementById("mic_image").src = "static_mic.gif";	
+		  		document.getElementById("mic_image").src = "static_mic.gif";
+		  		recognition.stop();	
 		  	}
 
 		});
@@ -147,6 +141,15 @@
 			var rama_regex = new RegExp(rama_synonyms[r],"g");
 			rama_synonyms_regex.push(rama_regex);
 		}
+
+		var recognition = new webkitSpeechRecognition();
+		recognition.continuous = true;
+		recognition.interimResults = true;
+		var grammar = '#JSGF V1.0; grammar colors; public <color> = hare | krishna | rama ;'
+		
+		var speechRecognitionList = new webkitSpeechGrammarList();
+		speechRecognitionList.addFromString(grammar, 1);
+		recognition.grammars = speechRecognitionList;
 
 		function upgrade() {
 		  alert("You need to update your browser ! . Sorry :(");
