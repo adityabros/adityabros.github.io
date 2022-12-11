@@ -1,5 +1,4 @@
-
-		document.getElementById("mic_image").addEventListener("click", function() {
+document.getElementById("mic_image").addEventListener("click", function() {
 
 
 			curr_src = document.getElementById("mic_image").src;
@@ -88,8 +87,7 @@
 		  		recognition.stop();	
 		  	}
 
-		});
-
+        
 		var create_email = false;
 		var final_transcript = '';
 		var recognizing = false;
@@ -126,3 +124,6 @@
 		function upgrade() {
 		  alert("You need to update your browser ! . Sorry :(");
 		}
+        
+
+		});
