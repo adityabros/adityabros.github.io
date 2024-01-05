@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hare Krishna Counter</title>
+	<style type="text/css">
+		#mic_image{
+			cursor: pointer;
+		}
+		body{
+			font-family: cursive;
+		}
+		#counts,#rounds{
+			font-weight: bold;
+		}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+	<h2 style="text-align: center;">Hare Ram Hare Krishna Maha-Mantra Counter</h2>
+	<h3 style="text-align: center;">Chant : Hare Rama Hare Rama Rama Rama Hare Hare | Hare Krishna Hare Krishna Krishna Krishna Hare Hare </h3>
+	<h4 style="text-align: center;">Tap Mic to Start/Stop Chanting</h4>
+	<div style="text-align: center;">
+		<img src="static_mic.gif" id="mic_image">
+		<p id="counts">Counts : 0</p>
+		<p id="rounds">Rounds : 0</p>
+		<p id="final_transcript"></p>
+		<p id="counters"></p>
+	</div>
+	<div style="text-align: center;">
+		<img src="iti_shodshakam.png" id="iti_shodshakam" style="width: 320px;">
+	</div>
+	<div>
+		<p>This application was designed so that people can count their Hare Krishna Maha Mantra chants. Sometimes people may not have their beads or some other issue so in that case they can use this Hare Krishna maha mantra counter to fill the gap and chant and be blissful.</p>
+	</div>
+
+	<script type="text/javascript">
+		document.getElementById("mic_image").addEventListener("click", function() {
+
+
+			curr_src = document.getElementById("mic_image").src;
+		  	
+		  	if (curr_src.indexOf("static_mic.gif") != -1){
+		  		//Haribol started
+
+		  		if (!('webkitSpeechRecognition' in window ) ) {
+		  		  upgrade();
+		  		  return;
+		  		} else {
+		  		  
+		  		  document.getElementById("mic_image").src = "mic.gif";
+		  		  
+
+		  		  recognition.start();
+		  		  recognition.onstart = function() {
+		  		   console.log("I started");
+		  		  };
+
+		  		  recognition.onerror = function(event) {
+		  		    		  };
+
+		  		  recognition.onend = function() {
+		  		  	if(manual_stop == false){
+		  		    	recognition.start();
+		  		  	}
+		  		  	else{
+		  		  		manual_stop = false;
+		  		  	}
+		  		  };
+
+		  		  recognition.onresult = function(event) {
+		  		    var interim_transcript = '';
+		  		    // console.log(event.results);
+
+		  		    for (var i = event.resultIndex; i < event.results.length; ++i) {
+		  		      if (event.results[i].isFinal) {
+		  		        final_transcript += event.results[i][0].transcript;
+		  		        
+		  		        var hare_count = 0;
+		  		        var krishna_count = 0;
+		  		        var rama_count = 0;
+
+		  		        for(var h=0;h<hare_synonyms_regex.length;h++){
+		  		        	hare_count += (final_transcript.toLowerCase().match(hare_synonyms_regex[h]) || []).length;
+		  		        }
+		  		        for(var k=0;k<krishna_synonyms_regex.length;k++){
+		  		        	krishna_count += (final_transcript.toLowerCase().match(krishna_synonyms_regex[k]) || []).length;
+		  		        }
+		  		        for(var r=0;r<rama_synonyms_regex.length;r++){
+		  		        	rama_count += (final_transcript.toLowerCase().match(rama_synonyms_regex[r]) || []).length;
+		  		        }
+		  		        // krishna_count = (final_transcript.toLowerCase().match(/krishna/g) || []).length;
+		  		        	
+		  		        // rama_count = (final_transcript.toLowerCase().match(/rama/g) || []).length;
+		  		        	
+		  		        // console.log(final_transcript)
+		  		        // console.log(hare_count,krishna_count,rama_count)
+		  		        document.getElementById("final_transcript").innerHTML =final_transcript;
+		  		        document.getElementById("counters").innerHTML =String(hare_count)+","+String(krishna_count)+","+String(rama_count);
+			  		    if(hare_count >= 8 && krishna_count >= 4 && rama_count >= 4){
+
+			  		    	// console.log(interim_transcript,ct)
+			  		    	ct += 1;
+			  		    	document.getElementById("counts").innerHTML ="Counts : " +String(ct);
+			  		    	document.getElementById("rounds").innerHTML = "Rounds : "+String(parseInt(ct/108));
+			  		    	final_transcript = "";
+			  		    	hare_count = 0;
+			  		    	krishna_count = 0;
+			  		    	rama_count = 0;
+			  		    }
+		  		      } else {
+		  		        interim_transcript += event.results[i][0].transcript;
+		  		      }
+		  		    }
+
+		  		    
+		  		    
+		  		    
+		  		  };
+		  		}
+
+		  	}
+		  	else{
+		  		document.getElementById("mic_image").src = "static_mic.gif";
+		  		manual_stop = true;
+		  		recognition.stop();	
+		  	}
+
+		});
+
+		var create_email = false;
+		var final_transcript = '';
+		var recognizing = false;
+		var ignore_onend;
+		var start_timestamp;
+		var ct = 0;
+		var hare_synonyms = ["hare","hurray","haray","hray","hrray","hara","har"];
+		var krishna_synonyms = ["krishna","krishn","krsna","klisna","krishnaa"];
+		var rama_synonyms = ["rama","raam","ram","ramaa","raamaa","rom","rome","lama","laam","lam","lamaa","laamaa"];
+		var hare_synonyms_regex = [];
+		var krishna_synonyms_regex = [];
+		var rama_synonyms_regex = [];
+		var manual_stop = false;
+
+		for(var h=0;h<hare_synonyms.length;h++){
+			var hare_regex = new RegExp(hare_synonyms[h],"g");
+			hare_synonyms_regex.push(hare_regex);
+		}
+		for(var k=0;k<krishna_synonyms.length;k++){
+			var krishna_regex = new RegExp(krishna_synonyms[k],"g");
+			krishna_synonyms_regex.push(krishna_regex);
+		}
+		for(var r=0;r<rama_synonyms.length;r++){
+			var rama_regex = new RegExp(rama_synonyms[r],"g");
+			rama_synonyms_regex.push(rama_regex);
+		}
+
+		var recognition = new webkitSpeechRecognition();
+		recognition.continuous = true;
+		recognition.interimResults = true;
+		var grammar = '#JSGF V1.0; grammar colors; public <color> = hare | krishna | rama ;'
+		
+		var speechRecognitionList = new webkitSpeechGrammarList();
+		speechRecognitionList.addFromString(grammar, 1);
+		recognition.grammars = speechRecognitionList;
+
+		function upgrade() {
+		  alert("You need to update your browser ! . Sorry :(");
+		}
+
+		
+
+	</script>
+</body>
+</html>
